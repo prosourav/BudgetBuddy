@@ -1,26 +1,39 @@
 import { NextResponse } from "next/server";
-import NextAuth from "next-auth";
 import { NextRequest } from "next/server";
-
-
-import { PUBLIC_ROUTES, LOGIN, ROOT, PROTECTED_SUB_ROUTES } from "@/config";
 import { cookies } from "next/headers";
 
 export async function middleware(request: NextRequest) {
   const { nextUrl } = request;
   const isAuthenticated = !!cookies().get("user");
 
-  const isPublicRoute = (
-    (PUBLIC_ROUTES.find(route => nextUrl.pathname.startsWith(route)) ||
-      nextUrl.pathname === ROOT) &&
-    !PROTECTED_SUB_ROUTES.find(route => nextUrl.pathname.includes(route))
-  );
+  const loginUrl = new URL('/login', nextUrl.origin);
+  const registerUrl = new URL('/register', nextUrl.origin);
+  const rootUrl = new URL('/', nextUrl.origin);
 
-  if (!isAuthenticated && !isPublicRoute) {
-    return NextResponse.redirect(new URL(LOGIN, nextUrl));
+  // If the user is not authenticated
+  if (!isAuthenticated) {
+    // Allow access to /login and /register routes
+    if (nextUrl.pathname === loginUrl.pathname || nextUrl.pathname === registerUrl.pathname) {
+      return NextResponse.next();
+    }
+
+    // Redirect to login page for all other routes
+    return NextResponse.redirect(loginUrl);
   }
+
+  // If the user is authenticated
+  if (isAuthenticated) {
+    // Redirect away from /login and /register routes
+    if (nextUrl.pathname === loginUrl.pathname || nextUrl.pathname === registerUrl.pathname) {
+      return NextResponse.redirect(rootUrl);
+    }
+  }
+
+  // Allow access to other routes
+  return NextResponse.next();
 }
 
+// Define the matcher for routes
 export const config = {
-  matcher: ["/((?!.+\\.[\\w]+$|_next).*)", "/", "/(api|trpc)(.*)"],
+  matcher: ["/((?!.+\\.[\\w]+$|_next).*)", "/(api|trpc)(.*)"],
 };

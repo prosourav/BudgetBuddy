@@ -1,6 +1,8 @@
 // hooks/useAuth.ts
+'use client'
 import { useState, useEffect, SetStateAction } from 'react';
-import { parseCookies, setCookie, destroyCookie } from 'nookies'
+import { parseCookies } from 'nookies'
+
 
 export const useAuth = () => {
   const [user, setUser] = useState<SetStateAction<string | null>>(null);
@@ -10,10 +12,8 @@ export const useAuth = () => {
     const checkAuth = async () => {
       try {
         const cookieData = parseCookies();
-        const  user  = JSON.parse(cookieData.user);
-    
-        if (user.email) {
-          setUser(user.email);
+        if (cookieData.token) {
+          setUser(cookieData.token);
         }
       } catch (error) {
         console.error('Auth check failed', error);

@@ -1,12 +1,10 @@
 import { auth } from "@/auth";
+import Logout from "@/components/Logout";
 import Image from "next/image";
 import { redirect } from "next/navigation";
-import Logout from "@/app/(auth)/Logout";
 
 const HomePage = async () => {
   const session = await auth();
-
-  if (!session?.user) redirect("/");
 
   return (
     <div className="flex flex-col items-center m-4">

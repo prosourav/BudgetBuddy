@@ -1,22 +1,23 @@
-import { parseCookie } from "next/dist/compiled/@edge-runtime/cookies";
 import { cookies } from "next/headers";
-import { parseCookies } from "nookies";
+import Link from "next/link";
+import Logout from "./Logout";
 
-const Header:React.FC = ():JSX.Element =>{
-  const cookieData = cookies().get("user");
-  
-  return(
+const Header: React.FC = (): JSX.Element => {
+
+  let user = cookies().get('token');
+
+
+  return (
     <div className="navbar">
-      <p className="navbar-heading">BudgetBuddy</p>
-      {cookieData ? (
-        <p className="navbar-link" onClick={()=> console.log("Logout")}>
-          <span style={{ marginRight: "1rem" }}>
-          
-          </span>
-          Logout
-        </p>
+      <p className="navbar-heading">
+        <Link className="link-page logo" href='/'>BudgetBuddy</Link>
+      </p>
+      {user?.value ? (
+       <Logout />
       ) : null}
     </div>
   );
 };
+
 export default Header;
+

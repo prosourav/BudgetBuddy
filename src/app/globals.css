@@ -71,6 +71,7 @@ textarea:focus {
   margin-top: 10px;
   text-decoration: none;
   cursor: pointer;
+  color: #004;
 }
 
 .primary-color {
@@ -109,4 +110,28 @@ textarea:focus {
   font-size: 20px;
   text-align: center;
   padding-bottom: 20px;
+}
+
+label {
+  display: flex;
+  align-items: center;
+  gap: 2px;
+}
+
+.err {
+  color: red;
+}
+
+.logo {
+  color: #fff;
+  font-size: 20px;
+}
+
+.user-nav{
+  font-weight: 400;
+  display: flex;
+  gap: 8px;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
 }

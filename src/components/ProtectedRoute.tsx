@@ -1,16 +1,21 @@
 'use client';
 
-import { useEffect } from 'react';
+import React, { useEffect } from 'react';
 import { useAuth } from '@/hooks/useAuth'; // Assume you have an auth hook
 import { useRouter } from 'next/navigation';
 
-const ProtectedRoute = ({ children }: { children: React.ReactNode }) => {
+interface AuthRouteProps {
+  children: React.ReactElement;
+}
+
+const AuthRoute: React.FC<AuthRouteProps> = ({ children }: { children: React.ReactNode }): JSX.Element | null => {
   const router = useRouter();
   const { user, loading } = useAuth();
-
+  
   useEffect(() => {
     if (!loading && user) {
-      router.push('/home');
+      console.log("I am here");
+      router.push('/');
     }
   }, [user, loading, router]);
 
@@ -21,4 +26,4 @@ const ProtectedRoute = ({ children }: { children: React.ReactNode }) => {
   return !user ? <>{children}</> : null;
 };
 
-export default ProtectedRoute;
+export default AuthRoute;
