@@ -7,6 +7,7 @@ import { z } from "zod";
 import AuthRoute from "@/components/ProtectedRoute";
 import { useRouter } from "next/navigation";
 import { doCredentialLogin } from "@/app/actions";
+import toast from "react-hot-toast";
 
 // Define the shape of your form data
 type FormData = z.infer<typeof userformSchema>;
@@ -23,22 +24,16 @@ const Login: React.FC = (): JSX.Element => {
   const router = useRouter();
 
   const onSubmit = async (data: FormData) => {
-
     try {
       const res = await doCredentialLogin(data);
-      console.log("Response:,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,", res);
       if (res) {
         return router.push('/');
       }
     } catch (error) {
-      console.log("I amhere");
-      console.log("error................................................................................", error);
-    } finally {
-      console.log("Hello");
+      toast.error("Check your credentials");
     }
 
   };
-
 
   return (
     <AuthRoute>

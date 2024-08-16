@@ -7,6 +7,7 @@ import { z } from "zod";
 import AuthRoute from "@/components/ProtectedRoute";
 import { useRouter } from "next/navigation";
 import { doCredentialRegister } from "@/app/actions";
+import toast from "react-hot-toast";
 
 
 type FormData = z.infer<typeof userCreateFormSchema>;
@@ -27,6 +28,7 @@ const Register: React.FC = (): JSX.Element => {
         return router.replace('/');
       }
     } catch (error) {
+      toast.error("Check your credentials");
       console.log(error);
     }
 

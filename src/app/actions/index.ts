@@ -30,10 +30,8 @@ export async function doCredentialLogin(formData: Record<string, string>) {
       password: formData.password,
       redirect: false,
     });
-    console.log("D################################");
     return response;
   } catch (err) {
-    console.log("Invoked................................................................",err);
     throw err;
   }
 }
