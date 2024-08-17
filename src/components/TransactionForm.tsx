@@ -1,68 +1,87 @@
-'use client'
-/* eslint-disable react/no-unescaped-entities */
-import Link from "next/link";
-import { FaRegUser } from "react-icons/fa";
-import { TbPasswordFingerprint } from "react-icons/tb";
+import { FormData, TransactionTypes } from "@/app/page";
+import { Dispatch, SetStateAction } from "react";
+import { FieldErrors, UseFormRegister } from "react-hook-form";
+import { IoCloseOutline } from "react-icons/io5";
 
 interface TransTitle {
   title: string;
   options: string[];
+  setIsOpen: Dispatch<SetStateAction<TransactionTypes>>
+  submitValue: () => void;
+  reset: () => void;
+  register: UseFormRegister<FormData>
+  errors: FieldErrors<{
+    name: string;
+    amount: string;
+    date: string;
+    tag: string;
+  }>;
 }
 
-const TransactionForm: React.FC<TransTitle> = ({ title, options }): JSX.Element => {
+const TransactionForm: React.FC<TransTitle> = ({ title, options, submitValue, register, errors, setIsOpen, reset }): JSX.Element => {
+  const required = <small style={{ color: 'red' }}>*</small>
+  const handleClose = () => { setIsOpen(null), reset() };
+
   return (
-    <div className="form-container">
-      <p className="form-title">Log In on <span className="primary-color">{title}</span></p>
-      <form onSubmit={() => console.log("Hello")}>
+    <div className="modal-form">
+      <span className="close" onClick={handleClose}>
+        <IoCloseOutline />
+      </span>
+      <p className="form-title">Add <span className="primary-color">{title}</span></p>
+      <form onSubmit={submitValue}>
         <div className="form-group">
 
           <label htmlFor="name">
-            Name</label>
+            Name{required}
+          </label>
           <input
             type="text"
             id="name"
-            name="name"
-            // value={formData.name}
-            // onChange={handleChange}
-            required
+            {...register('name')}
           />
+          {errors.name && <small className="err">{errors.name.message}</small>}
+
         </div>
 
         <div className="form-group">
 
           <label htmlFor="amount">
-            Amount</label>
+            Amount{required}
+          </label>
           <input
             type="number"
             id="amount"
-            name="amount"
-
-            // value={formData.name}
-            // onChange={handleChange}
-            required
+            {...register('amount')}
           />
+          {errors.amount && <small className="err">{errors.amount.message}</small>}
+
         </div>
 
         <div className="form-group">
           <label htmlFor="date">
-            Date</label>
+            Date{required}
+          </label>
           <input
-            type="password"
-            id="password"
-            name="password"
-            placeholder="Test@123"
-            required
+            type="date"
+            id="date"
+            {...register('date')}
           />
+          {errors.date && <small className="err">{errors.date.message}</small>}
+
         </div>
         <div className="form-group">
           <label htmlFor="tag">
-            Tag
+            Type{required}
           </label>
-         <select >
-          <option value="">op1</option>
-         </select>
+          <select id="tag" {...register("tag")}>
+            <option hidden value={''}>Please Select</option>
+            {
+              options.map((item) => <option  key={item} value={item}>{item}</option>)
+            }
+          </select>
+          {errors.tag && <small className="err">{errors.tag.message}</small>}
         </div>
-        <button>{title}</button>
+        <button type="submit">Add {title}</button>
       </form>
     </div>
   );

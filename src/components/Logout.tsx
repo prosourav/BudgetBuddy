@@ -12,7 +12,7 @@ const Logout: React.FC = (): JSX.Element => {
   };
   return (
     <p className="user-nav" onClick={handleLogout} >
-      <span style={{ cursor: 'pointer' }}>
+      <span style={{ cursor: 'pointer', paddingTop:'4px' }}>
         <FaUser />
       </span>
       Logout
