@@ -1,5 +1,5 @@
 import axios, { AxiosResponse } from 'axios';
-
+import { cookies } from 'next/headers';
 
 const instance = axios.create({
   baseURL: `${process.env.NEXT_PUBLIC_APP_API_ENDPOINT}`
@@ -7,20 +7,20 @@ const instance = axios.create({
 
 instance.defaults.headers.post["Content-Type"] = "application/json";
 instance.defaults.headers["Accept"] = "application/json";
-instance.defaults.timeout = 15000,
+instance.defaults.timeout = 15000;
 
-  instance.interceptors.request.use(
-    function (config) {
-      const accessToken = null;
-      if (accessToken) {
-        config.headers.Authorization = `Bearer ${accessToken}`;
-      }
-      return config;
-    },
-    function (error) {
-      return Promise.reject(error);
+instance.interceptors.request.use(
+  function (config) {
+    const tokenCookie = cookies().get("token");
+    if (tokenCookie && tokenCookie.value) {
+      config.headers.Authorization = `Bearer ${tokenCookie.value}`;
     }
-  );
+    return config;
+  },
+  function (error) {
+    return Promise.reject(error);
+  }
+);
 
 const responseBody = (response: AxiosResponse) => response.data;
 

@@ -3,10 +3,8 @@
 import React, { useEffect } from 'react';
 import { useAuth } from '@/hooks/useAuth'; // Assume you have an auth hook
 import { useRouter } from 'next/navigation';
+import { AuthRouteProps } from '@/types';
 
-interface AuthRouteProps {
-  children: React.ReactElement;
-}
 
 const AuthRoute: React.FC<AuthRouteProps> = ({ children }: { children: React.ReactNode }): JSX.Element | null => {
   const router = useRouter();

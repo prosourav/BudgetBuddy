@@ -1,22 +1,6 @@
-import { FormData, TransactionTypes } from "@/app/page";
-import { Dispatch, SetStateAction } from "react";
-import { FieldErrors, UseFormRegister } from "react-hook-form";
+import { TransTitle } from "@/types";
 import { IoCloseOutline } from "react-icons/io5";
 
-interface TransTitle {
-  title: string;
-  options: string[];
-  setIsOpen: Dispatch<SetStateAction<TransactionTypes>>
-  submitValue: () => void;
-  reset: () => void;
-  register: UseFormRegister<FormData>
-  errors: FieldErrors<{
-    name: string;
-    amount: string;
-    date: string;
-    tag: string;
-  }>;
-}
 
 const TransactionForm: React.FC<TransTitle> = ({ title, options, submitValue, register, errors, setIsOpen, reset }): JSX.Element => {
   const required = <small style={{ color: 'red' }}>*</small>
@@ -64,6 +48,7 @@ const TransactionForm: React.FC<TransTitle> = ({ title, options, submitValue, re
           <input
             type="date"
             id="date"
+            max={new Date().toISOString().split("T")[0]}
             {...register('date')}
           />
           {errors.date && <small className="err">{errors.date.message}</small>}
@@ -76,7 +61,7 @@ const TransactionForm: React.FC<TransTitle> = ({ title, options, submitValue, re
           <select id="tag" {...register("tag")}>
             <option hidden value={''}>Please Select</option>
             {
-              options.map((item) => <option  key={item} value={item}>{item}</option>)
+              options.map((item) => <option key={item} value={item}>{item}</option>)
             }
           </select>
           {errors.tag && <small className="err">{errors.tag.message}</small>}

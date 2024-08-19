@@ -10,10 +10,13 @@
   },
   "dependencies": {
     "@hookform/resolvers": "^3.9.0",
+    "@tanstack/react-table": "^8.20.1",
     "axios": "^1.7.4",
+    "chart.js": "^4.4.3",
     "next": "14.2.5",
     "next-auth": "^5.0.0-beta.20",
     "nookies": "^2.5.2",
+    "papaparse": "^5.4.1",
     "react": "^18",
     "react-chartjs-2": "^5.2.0",
     "react-dom": "^18",
@@ -24,6 +27,7 @@
   },
   "devDependencies": {
     "@types/node": "^20",
+    "@types/papaparse": "^5.3.14",
     "@types/react": "^18",
     "@types/react-dom": "^18",
     "eslint": "^8",

@@ -1,27 +1,10 @@
 'use client'
-/* eslint-disable react/no-unescaped-entities */
+import { RegisterFormProps } from "@/types";
 import Link from "next/link";
-import { FieldErrors, UseFormRegister } from "react-hook-form";
 import { FaRegUser } from "react-icons/fa";
 import { MdOutlineEmail } from "react-icons/md";
 import { TbPasswordFingerprint } from "react-icons/tb";
 
-
-interface RegisterFormProps {
-  submitValue: () => void;
-  register: UseFormRegister<{
-    name: string;
-    email: string;
-    password: string;
-    confirmPassword: string;
-  }>;
-  errors: FieldErrors<{
-    name: string;
-    email: string;
-    password: string;
-    confirmPassword: string;
-  }>;
-}
 
 const RegisterForm: React.FC<RegisterFormProps> = ({ submitValue, register, errors }): JSX.Element => {
   const required = <small style={{ color: 'red' }}>*</small>

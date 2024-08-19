@@ -11,6 +11,9 @@ body {
   justify-content: space-between;
   padding: 0px 20px;
   font-weight: 700;
+  position: fixed;
+  width: 96%;
+  top: 0;
 }
 
 .form-container {
@@ -142,7 +145,8 @@ label {
   display: flex;
   justify-content: space-between;
   flex-wrap: wrap;
-  margin: 10px;
+  margin-top: 80px;
+  z-index: 1;
 }
 
 .card {
@@ -160,7 +164,7 @@ label {
 }
 
 .amt {
-  padding: 6px 0px;
+  padding: 8px 2px;
 }
 
 .modal {
@@ -197,11 +201,168 @@ label {
   justify-content: flex-end;
 }
 
-.cancelButton, .confirmButton {
+.cancelButton,
+.confirmButton {
   width: 90px;
   padding: 8px 16px;
   border: none;
   border-radius: 3px;
   cursor: pointer;
   transition: background-color 0.3s;
+}
+
+.stat-wrapper {
+  display: flex;
+  align-items: center;
+  margin: 20px 0px;
+  height: 500px;
+}
+
+.line-chart-title {
+  text-align: left;
+  position: relative;
+  line-height: 0px;
+  top: 20px;
+  left: 10px;
+  padding-left: 16px;
+}
+
+.chart-container {
+  width: 100%;
+  height: 100%;
+  padding: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+}
+
+.line-chart-wrapper {
+  width: 64%;
+  height: 400px;
+  border: 1px;
+  padding: 10px;
+  background-color: #fffef7;
+}
+.pie-chart-wrapper {
+  height: 400px;
+  /* width: 25%; */
+  padding: 10px;
+  margin: 10px auto;
+}
+.pie-chart-title {
+  text-align: center;
+  position: relative;
+  line-height: 0px;
+  top: 20px;
+  margin-bottom: 40px;
+}
+.pie-wrapper {
+  height: 400px;
+  margin-top: 10px;
+}
+
+.input-flex {
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  gap: 0.8rem;
+  box-shadow: 0px 0px 30px 8px rgba(227, 227, 227, 0.75);
+  border-radius: 0.5rem;
+  padding: 0rem 0.5rem;
+}
+
+.search-box {
+  width: 60%;
+  padding: 10px 5px;
+}
+
+.select-box {
+  width: 36%;
+  position: relative;
+}
+
+.input-flex input,
+.input-flex select {
+  width: 100%;
+  padding: 0.5rem;
+  border: 0;
+  background: transparent;
+  font-size: 1rem;
+}
+
+.input-flex input:focus,
+.input-flex select:focus {
+  outline: none;
+}
+
+.input-flex select {
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+  cursor: pointer;
+}
+
+/* Custom dropdown arrow only for select box */
+.select-box::after {
+  content: '\25BC';
+  position: absolute;
+  top: 50%;
+  right: 0.5rem;
+  transform: translateY(-50%);
+  pointer-events: none;
+}
+
+.my-table {
+  box-shadow: 0px 0px 30px 8px rgba(227, 227, 227, 0.75);
+  border-radius: 0.5rem !important;
+  padding: 2rem;
+  margin-bottom: 4rem;
+}
+
+
+.radio-group {
+  display: inline-flex;
+  overflow: hidden;
+  border-radius: 15px;
+  box-shadow: 0 0 5px rgba(0, 0, 0, 0.25);
+}
+
+.radio-button {
+  float: left;
+  margin: 0;
+  background-color: #fff;
+  border: 1px solid #d9d9d9;
+  overflow: hidden;
+  transition: all 0.3s ease;
+}
+
+.radio-button:hover {
+  color: #40a9ff;
+}
+
+.radio-button input {
+  position: absolute;
+  opacity: 0;
+  cursor: pointer;
+}
+
+.radio-button span {
+  display: block;
+  padding: 8px 15px;
+  line-height: 22px;
+  cursor: pointer;
+}
+
+.radio-button input:checked + span {
+  background-color: #1890ff;
+  color: #fff;
+}
+
+.radio-button:first-of-type {
+  border-radius: 15px 0 0 15px;
+}
+
+.radio-button:last-of-type {
+  border-radius: 0 15px 15px 0;
 }

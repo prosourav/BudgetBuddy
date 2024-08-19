@@ -1,20 +1,7 @@
-/* eslint-disable react/no-unescaped-entities */
 import { TbPasswordFingerprint } from "react-icons/tb";
 import Link from "next/link";
 import { MdOutlineEmail } from "react-icons/md";
-import { UseFormRegister, FieldErrors } from "react-hook-form";
-
-interface LoginFormProps {
-  submitValue: () => void;
-  register: UseFormRegister<{
-    email: string;
-    password: string;
-  }>;
-  errors: FieldErrors<{
-    email: string;
-    password: string;
-  }>;
-}
+import { LoginFormProps } from "@/types";
 
 const LoginForm: React.FC<LoginFormProps> = ({ submitValue, register, errors }): JSX.Element => {
   const required = <small style={{ color: 'red' }}>*</small>;
@@ -48,7 +35,7 @@ const LoginForm: React.FC<LoginFormProps> = ({ submitValue, register, errors }):
           {errors.password && <small className="err">{errors.password.message}</small>}
         </div>
         <button type="submit">Submit</button>
-        <Link href='/register' className="link-page">Don't Have An Account? Click Here.</Link>
+        <Link href='/register' className="link-page">Do not Have An Account? Click Here.</Link>
       </form>
     </div>
   );

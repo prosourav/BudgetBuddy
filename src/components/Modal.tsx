@@ -1,13 +1,7 @@
 'use client'
-import { TransactionTypes } from "@/app/page";
-import { Dispatch, SetStateAction, useEffect, useRef } from "react";
+import { ModalProps } from "@/types";
+import { useEffect, useRef } from "react";
 
-interface ModalProps {
-  children: React.ReactNode;
-  open: boolean
-  setIsOpen: Dispatch<SetStateAction<TransactionTypes>>;
-  reset: () => void
-}
 
 const Modal: React.FC<ModalProps> = ({ children, open, setIsOpen, reset }) => {
   const modalRef = useRef<HTMLDivElement | null>(null);

@@ -1,12 +1,6 @@
+import { ConfirmationModalProps } from '@/types';
 import React, { Dispatch, SetStateAction } from 'react';
-import { TransactionTypes } from '@/app/page';
 import { IoCloseOutline } from 'react-icons/io5';
-
-interface ConfirmationModalProps {
-  title: string;
-  setIsOpen: Dispatch<SetStateAction<TransactionTypes>>;
-  resetBalance: () => void;
-}
 
 const ConfirmationModal: React.FC<ConfirmationModalProps> = ({
   setIsOpen, title, resetBalance
