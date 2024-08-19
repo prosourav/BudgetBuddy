@@ -1,5 +1,6 @@
 body {
   font-family: Arial, sans-serif;
+  overflow-x: hidden;
 }
 
 .navbar {
@@ -14,11 +15,12 @@ body {
   position: fixed;
   width: 96%;
   top: 0;
+
 }
 
 .form-container {
   max-width: 360px;
-  margin: 5% auto;
+  margin: 10% auto;
   padding: 30px;
   border-radius: 12px;
   box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
@@ -145,7 +147,7 @@ label {
   display: flex;
   justify-content: space-between;
   flex-wrap: wrap;
-  margin-top: 80px;
+  margin-top: 60px;
   z-index: 1;
 }
 
@@ -209,6 +211,10 @@ label {
   border-radius: 3px;
   cursor: pointer;
   transition: background-color 0.3s;
+}
+
+.container{
+  padding: 20px;
 }
 
 .stat-wrapper {
@@ -365,4 +371,54 @@ label {
 
 .radio-button:last-of-type {
   border-radius: 0 15px 15px 0;
+}
+
+.search-and-filter {
+  display: flex;
+  margin: 10px 20px;
+  gap: 20px;
+}
+
+.search-box .search-icon {
+  padding-left: 10px;
+}
+
+.transactions-container {
+  margin-top: 20px;
+   padding: 20px;
+}
+
+.header-container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+  margin-bottom: 1rem;
+}
+
+.export-button {
+  width: 160px;
+  background-color: rgb(42, 161, 246);
+  color: white;
+  border: none;
+  cursor: pointer;
+}
+
+.pagination-buttons {
+  width: 200px;
+  margin-left: auto;
+  display: flex;
+  gap: 10px;
+}
+
+.pagination-button {
+  background: white;
+  color: black;
+  border: 1px solid rgb(0, 76, 255);
+  cursor: pointer;
+}
+
+.pagination-button.disabled {
+  cursor: not-allowed;
+  opacity: 0.6;
 }

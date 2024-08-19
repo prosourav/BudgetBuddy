@@ -3,7 +3,6 @@ import React, { useState, useMemo } from 'react';
 import { FaSearch } from 'react-icons/fa';
 import TransactionTable from './Table';
 import { TransactionsType, Transaction } from '@/types';
-import { unparse } from "papaparse";
 import { exportToCsv } from '@/utils/csv-export';
 
 const Transactions: React.FC<TransactionsType> = ({ transactions }): JSX.Element => {
@@ -57,26 +56,25 @@ const Transactions: React.FC<TransactionsType> = ({ transactions }): JSX.Element
 
   const paginatedData = filteredAndSortedData.slice((currentPage - 1) * dataPerpage, currentPage * dataPerpage);
 
-
   const handlePrevPage = () => {
     if (currentPage === 1) return;
-    return setCurrentPage(prv => prv - 1);
+    return setCurrentPage(prev => prev - 1);
   };
+
   const handleNextPage = () => {
     if (currentPage === Math.ceil(transactions.length / dataPerpage)) return;
-    return setCurrentPage(prv => prv + 1);
+    return setCurrentPage(prev => prev + 1);
   };
 
   const exportData = () => {
     return exportToCsv(filteredAndSortedData);
   };
 
-
   return (
     <>
-      <div style={{ display: 'flex', margin: '10px 20px', gap: '20px' }}>
+      <div className="search-and-filter">
         <div className="input-flex search-box">
-          <FaSearch style={{ paddingLeft: "10px" }} />
+          <FaSearch className="search-icon" />
           <input
             placeholder="Search by Name"
             onChange={(e) => setSearchTerm(e.target.value)}
@@ -96,17 +94,9 @@ const Transactions: React.FC<TransactionsType> = ({ transactions }): JSX.Element
         </div>
       </div>
 
-      <div className="my-table">
-        <div
-          style={{
-            display: "flex",
-            justifyContent: "space-between",
-            alignItems: "center",
-            width: "100%",
-            marginBottom: "1rem",
-          }}
-        >
-          <h2 style={{ paddingLeft: '25px' }}>My Transactions</h2>
+      <div className="transactions-container">
+        <div className="header-container">
+          <h2>My Transactions</h2>
 
           <div className="radio-group input-radio">
             <label className="radio-button">
@@ -141,22 +131,27 @@ const Transactions: React.FC<TransactionsType> = ({ transactions }): JSX.Element
             </label>
           </div>
 
-          <button style={{ width: '160px' }} onClick={exportData}>
+          <button className="export-button" onClick={exportData}>
             Export to CSV
           </button>
 
         </div>
         <TransactionTable columns={columns} dataSource={paginatedData} />
-        <div style={{ width: "200px", marginLeft: "auto", display: 'flex', gap: '10px' }}>
-          <button style={{ background: "white", color: 'blue', border: '1px solid blue', cursor: `${currentPage === 1 ? 'not-allowed' : 'pointer'}` }}
+        <div className="pagination-buttons">
+          <button
+            className={`pagination-button ${currentPage === 1 ? 'disabled' : ''}`}
             onClick={handlePrevPage}
-            disabled={currentPage === 0}
-          >Previous</button>
-          <button style={{ background: "white", color: 'blue', border: '1px solid blue', cursor: `${currentPage === Math.ceil(transactions.length / dataPerpage) ? 'not-allowed': 'pointer'}` }}
-            onClick={handleNextPage}
-            disabled={currentPage === transactions.length}
+            disabled={currentPage === 1}
           >
-            Next</button>
+            Previous
+          </button>
+          <button
+            className={`pagination-button ${currentPage === Math.ceil(transactions.length / dataPerpage) ? 'disabled' : ''}`}
+            onClick={handleNextPage}
+            disabled={currentPage === Math.ceil(transactions.length / dataPerpage)}
+          >
+            Next
+          </button>
         </div>
       </div>
     </>
